@@ -1,6 +1,8 @@
+<!-- Base Layout: base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Budget Tracker{% endblock %}</title>
@@ -9,11 +11,16 @@
 <body>
     <!-- Header / Navigation Bar -->
     <header>
-        <nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div> <!-- Hamburger icon top bar -->
+            <div></div> <!-- Hamburger icon middle bar -->
+            <div></div> <!-- Hamburger icon bottom bar -->
+        </div>
+        <nav id="navbar">
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'add_expense' %}">Add Expense</a></li>
-                <li><a href="{% url 'index' %}">View Expenses</a></li>
+                <li><a href="{% url 'add_expense' %}" class="button-link">Add Expense</a></li>
+                <li><a href="{% url 'index' %}" class="button-link">View Expenses</a></li>
             </ul>
         </nav>
     </header>
@@ -27,5 +34,16 @@
     <footer>
         <p>&copy; 2024 My Budget Tracker. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navbar = document.getElementById('navbar');
+
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,15 +6,18 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Header and Navigation */
 header {
     background-color: #333;
     color: white;
     padding: 10px;
+    position: relative;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 nav ul li {
@@ -21,25 +25,148 @@ nav ul li {
     margin-right: 20px;
 }
 
+/* Make all links appear like buttons */
 a {
     color: white;
     text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    transition: background-color 0.3s;
 }
 
 a:hover {
-    text-decoration: underline;
+    background-color: #45a049;
 }
 
-main {
-    padding: 20px;
+/* Hamburger Icon (Mobile only) */
+#menu-toggle {
+    display: none;  /* Hidden by default */
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100; /* Ensure it's always above other content */
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
+#menu-toggle div {
+    background-color: white;
+    height: 4px;
     width: 100%;
+    margin: 5px 0;
+    display: block;
+}
+
+/* Toggle the hamburger icon into an "X" when active */
+#menu-toggle.active div:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 10px;
+}
+
+#menu-toggle.active div:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle.active div:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -10px;
+}
+
+/* Navbar Styles (Mobile) */
+#navbar {
+    display: none;  /* Hidden by default */
+    flex-direction: column;
+    background-color: #333;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#navbar.active {
+    display: flex; /* Show the navbar when active */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block;  /* Show the hamburger icon on mobile screens */
+    }
+
+    #navbar {
+        flex-direction: column;
+    }
+
+    #navbar.active {
+        display: flex;
+    }
+
+    #navbar ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    #navbar ul li {
+        margin: 10px 0;
+    }
+}
+
+@media (min-width: 769px) {
+    #menu-toggle {
+        display: none;  /* Hide the hamburger icon on large screens */
+    }
+
+    #navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        position: static;
+        background-color: transparent;
+    }
+
+    #navbar ul {
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
+
+    #navbar ul li {
+        margin-right: 20px;
+    }
+}
+
+/* Button styles for links with the .button-link class */
+.button-link {
+    display: inline-block;
+    padding: 12px 25px; /* Adjust padding for a button-like size */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    border: none; /* Remove border (for form button style) */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+/* Hover effect */
+.button-link:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Slightly raise the button */
+}
+
+/* Focus effect (for accessibility) */
+.button-link:focus {
+    outline: 2px solid #f0f0f0;
+    outline-offset: 4px;
 }
