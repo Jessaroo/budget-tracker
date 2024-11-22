@@ -8,11 +8,13 @@
 
     <div>
         <h2>Latest Expense Summary</h2>
-        <!-- Example of listing expenses or budget data -->
         <ul>
-            <li>Expense 1: $50 - Groceries</li>
-            <li>Expense 2: $100 - Entertainment</li>
-            <li>Expense 3: $30 - Transportation</li>
+            <!-- Loop through the expenses and display them dynamically -->
+            {% for expense in expenses %}
+                <li>Expense: ${{ expense.amount }} - {{ expense.category }} - {{ expense.description }}</li>
+            {% empty %}
+                <li>No expenses added yet.</li>
+            {% endfor %}
         </ul>
     </div>
 {% endblock %}

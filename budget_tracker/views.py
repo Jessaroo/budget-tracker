@@ -1,4 +1,6 @@
+# views.py
 from django.shortcuts import render
+from budget.models import Expense  # Import the Expense model
 
 # View for the homepage
 def home(request):
@@ -7,19 +9,25 @@ def home(request):
 # View for adding a new expense
 def add_expense(request):
     if request.method == "POST":
-        # Handle the form submission to add the expense to the database
         description = request.POST['description']
         amount = request.POST['amount']
         category = request.POST['category']
 
-        # Add logic to save this data in the database (create a new Expense object)
+        # Create a new Expense object and save it to the database
+        new_expense = Expense(description=description, amount=amount, category=category)
+        new_expense.save()
+
         return render(request, 'add_expense.html', {
             'message': f'Expense "{description}" added successfully!'
         })
 
-    # GET request: show the form to add a new expense
     return render(request, 'add_expense.html')
 
-# View for the index page (this could be a summary of expenses)
+# View for the index page (showing all expenses)
 def index(request):
-    return render(request, 'index.html')
+    # Fetch all the expenses from the database
+    expenses = Expense.objects.all()
+
+    return render(request, 'index.html', {
+        'expenses': expenses  # Pass the expenses to the template
+    })
