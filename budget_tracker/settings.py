@@ -14,7 +14,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Add your app here
 ]
 
 MIDDLEWARE = [
@@ -71,7 +70,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Add this line
+    BASE_DIR / 'static', 
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # For production
 
