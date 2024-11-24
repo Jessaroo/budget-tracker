@@ -1,20 +1,102 @@
-{% extends 'base.html' %}
-
-{% block title %}Welcome to My Budget Tracker{% endblock %}
-
-{% block content %}
-    <h1>Welcome to My Budget Tracker!</h1>
-    <p>Keep track of your expenses and budget effectively.</p>
-
-    <div>
-        <h2>Latest Expense Summary</h2>
+<h1>Expenses</h1>
+<!-- Main container to hold both summary and expenses -->
+<div id="main-container">
+    <!-- Category Summary Section (on the right) -->
+    <div id="category-summary">
+        <h2>Category Summary</h2>
         <ul>
-            <!-- Loop through the expenses and display them dynamically -->
-            {% for expense in expenses %}
-                <li>Expense: ${{ expense.amount }} - {{ expense.category }} - {{ expense.description }}</li>
+            {% for item in summary %}
+                <li>{{ item.category }}: ${{ item.total_spent|floatformat:2 }}</li>
             {% empty %}
-                <li>No expenses added yet.</li>
+                <li>No summary available.</li>
             {% endfor %}
         </ul>
     </div>
-{% endblock %}
+
+    <!-- Expense List Section (on the left) -->
+    <div id="expenses-list">
+        <h2>Expenses</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense.category }}</td>
+                        <td>${{ expense.amount|floatformat:2 }}</td>
+                        <td>{{ expense.description }}</td>
+                        <td>{{ expense.date }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No expenses available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}View Expenses - My Budget Tracker{% endblock %}
+
+{% block content %}
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+    <!-- Left: Main Content -->
+    <div style="width: 70%; padding-right: 20px;">
+        <h1>All Expenses</h1>
+        <ul>
+            {% for expense in expenses %}
+                <li>
+                    <strong>{{ expense.category }}</strong>: ${{ expense.amount }} - 
+                    {{ expense.description }} 
+                    ({{ expense.date|date:"M d, Y" }})
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Right: Summary Section -->
+    <div style="width: 25%; border-left: 1px solid #ccc; padding-left: 20px;">
+        <h2>Summary</h2>
+        <ul>
+            {% for item in summary %}
+                <li>
+                    <strong>{{ item.category }}</strong>: ${{ item.total_spent }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %} {% endcomment %}
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}View Expenses - My Budget Tracker{% endblock %}
+
+{% block content %}
+    <h1>Your Expenses</h1>
+    <ul>
+        <!-- Loop through the `expenses` data passed from the view -->
+        {% for expense in expenses %}
+            <li>
+                <!-- Display the expense's category, amount, description, and date -->
+                {{ expense.category }}: {{ expense.description }} - ${{ expense.amount }} ({{ expense.date }})
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/add-expense" class="button-link">Add Another Expense</a>
+{% endblock %} {% endcomment %}
