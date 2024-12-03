@@ -14,12 +14,10 @@ body {
     padding: 20px;
     justify-content: space-between; /* Ensure the main content and sidebar are spaced correctly */
 }
-
 .expenses-list {
     width: 70%; /* Take up 70% of the page for the expenses list */
     padding-right: 20px; /* Space between list and sidebar */
 }
-
 .sidebar {
     width: 30%; /* Sidebar takes up 30% of the page width */
     border-left: 1px solid #ccc; /* Add a vertical divider */
@@ -33,7 +31,6 @@ body {
     justify-content: flex-start; /* Align content from top */
     z-index: 1; /* Ensure it stays on top of other elements */
 }
-
 /* Sidebar heading */
 .sidebar h2 {
     font-size: 1.5em;
@@ -41,7 +38,6 @@ body {
     margin-bottom: 15px;
     text-align: center; /* Center-align the heading for better focus */
 }
-
 /* Category summary styles */
 .category-summary {
     background-color: #f9f9f9;
@@ -54,7 +50,6 @@ body {
     flex-direction: column;
     align-items: flex-end; /* Align the category list to the right */
 }
-
 /* Category summary list styling */
 .category-summary ul {
     list-style: none; /* Remove default list bullets */
@@ -62,7 +57,6 @@ body {
     margin: 0;
     width: 100%; /* Take up full width */
 }
-
 .category-summary li {
     font-size: 1em;
     margin-bottom: 10px; /* Space between categories */
@@ -73,7 +67,6 @@ body {
     background-color: #f9f9f9; /* Subtle background color */
     border-radius: 4px; /* Rounded corners for list items */
 }
-
 /* Header and Navigation */
 header {
     background-color: #333;
@@ -186,16 +179,13 @@ a:hover {
     #navbar ul li {
         margin: 10px 0;
     }
-
     .main-content {
         flex-direction: column; /* Stack content and sidebar vertically on smaller screens */
     }
-
     .expenses-list, .sidebar {
         width: 100%; /* Both take full width */
         padding: 0; /* Remove extra padding for smaller screens */
     }
-
     .sidebar {
         margin-top: 20px; /* Add spacing between stacked sections */
     }
@@ -253,7 +243,6 @@ a:hover {
     outline: 2px solid #f0f0f0;
     outline-offset: 4px;
 }
-
 /* Add hover effect to category summary */
 .category-summary li:hover {
     background-color: #e6f7ff; /* Highlight with a light blue color */

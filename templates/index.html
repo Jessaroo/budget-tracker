@@ -1,5 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>Expenses</h1>
 <!-- Main container to hold both summary and expenses -->
+<div class="button-container">
+    <a href="{% url 'home' %}" class="button-link">Home</a>
+    <a href="{% url 'add_expense' %}" class="button-link">Add Expense</a>
+</div>
+
 <div id="main-container">
     <!-- Category Summary Section (on the right) -->
     <div id="category-summary">
@@ -41,62 +49,5 @@
             </tbody>
         </table>
     </div>
-</div>
-
-
-
-{% comment %} {% extends 'base.html' %}
-
-{% block title %}View Expenses - My Budget Tracker{% endblock %}
-
-{% block content %}
-<div style="display: flex; flex-direction: row; justify-content: space-between;">
-
-    <!-- Left: Main Content -->
-    <div style="width: 70%; padding-right: 20px;">
-        <h1>All Expenses</h1>
-        <ul>
-            {% for expense in expenses %}
-                <li>
-                    <strong>{{ expense.category }}</strong>: ${{ expense.amount }} - 
-                    {{ expense.description }} 
-                    ({{ expense.date|date:"M d, Y" }})
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <!-- Right: Summary Section -->
-    <div style="width: 25%; border-left: 1px solid #ccc; padding-left: 20px;">
-        <h2>Summary</h2>
-        <ul>
-            {% for item in summary %}
-                <li>
-                    <strong>{{ item.category }}</strong>: ${{ item.total_spent }}
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-
-</div>
-{% endblock %} {% endcomment %}
-
-
-
-{% comment %} {% extends 'base.html' %}
-
-{% block title %}View Expenses - My Budget Tracker{% endblock %}
-
-{% block content %}
-    <h1>Your Expenses</h1>
-    <ul>
-        <!-- Loop through the `expenses` data passed from the view -->
-        {% for expense in expenses %}
-            <li>
-                <!-- Display the expense's category, amount, description, and date -->
-                {{ expense.category }}: {{ expense.description }} - ${{ expense.amount }} ({{ expense.date }})
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="/add-expense" class="button-link">Add Another Expense</a>
-{% endblock %} {% endcomment %}
+</div> 
+{% endblock %} 

@@ -1,0 +1,236 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Layout for main content and sidebar */
+.main-content {
+    display: flex; /* Align content and sidebar horizontally */
+    max-width: 1200px; /* Limit the total width for readability */
+    margin: 0 auto; /* Center align the content */
+    padding: 20px;
+    justify-content: space-between; /* Ensure the main content and sidebar are spaced correctly */
+}
+.expenses-list {
+    width: 70%; /* Take up 70% of the page for the expenses list */
+    padding-right: 20px; /* Space between list and sidebar */
+}
+.sidebar {
+    width: 30%; /* Sidebar takes up 30% of the page width */
+    border-left: 1px solid #ccc; /* Add a vertical divider */
+    padding-left: 20px; /* Add space on the left inside the sidebar */
+    background-color: #fff; /* Ensure it stands out with a white background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for emphasis */
+    border-radius: 8px; /* Rounded corners */
+    position: relative; /* Position the category summary inside it */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content from top */
+    z-index: 1; /* Ensure it stays on top of other elements */
+}
+/* Sidebar heading */
+.sidebar h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center; /* Center-align the heading for better focus */
+}
+/* Category summary styles */
+.category-summary {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px; /* Space between category summary and other content */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align the category list to the right */
+}
+/* Category summary list styling */
+.category-summary ul {
+    list-style: none; /* Remove default list bullets */
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Take up full width */
+}
+.category-summary li {
+    font-size: 1em;
+    margin-bottom: 10px; /* Space between categories */
+    color: #555;
+    display: flex;
+    justify-content: space-between; /* Align category and amount horizontally */
+    padding: 10px;
+    background-color: #f9f9f9; /* Subtle background color */
+    border-radius: 4px; /* Rounded corners for list items */
+}
+/* Header and Navigation */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+/* Make links look like buttons */
+a.button {
+    display: inline-block;
+    padding: 12px 25px; /* Adjust padding for a button-like size */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Make the text bold */
+    border: none; /* Remove border (for form button style) */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    z-index: 2; /* Ensure the buttons appear above other content */
+}
+
+/* Hover effect */
+a.button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Slightly raise the button */
+}
+
+/* Focus effect (for accessibility) */
+a.button:focus {
+    outline: 2px solid #f0f0f0;
+    outline-offset: 4px;
+}
+
+/* Add hover effect to category summary */
+.category-summary li:hover {
+    background-color: #e6f7ff; /* Highlight with a light blue color */
+    color: #000; /* Darker text for emphasis */
+}
+
+/* Hamburger Icon (Mobile only) */
+#menu-toggle {
+    display: none;  /* Hidden by default */
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100; /* Ensure it's always above other content */
+}
+
+#menu-toggle div {
+    background-color: white;
+    height: 4px;
+    width: 100%;
+    margin: 5px 0;
+    display: block;
+}
+
+/* Toggle the hamburger icon into an "X" when active */
+#menu-toggle.active div:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 10px;
+}
+
+#menu-toggle.active div:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-toggle.active div:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -10px;
+}
+
+/* Navbar Styles (Mobile) */
+#navbar {
+    display: none;  /* Hidden by default */
+    flex-direction: column;
+    background-color: #333;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#navbar.active {
+    display: flex; /* Show the navbar when active */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block;  /* Show the hamburger icon on mobile screens */
+    }
+
+    #navbar {
+        flex-direction: column;
+    }
+
+    #navbar.active {
+        display: flex;
+    }
+
+    #navbar ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+    }
+
+    #navbar ul li {
+        margin: 10px 0;
+    }
+    .main-content {
+        flex-direction: column; /* Stack content and sidebar vertically on smaller screens */
+    }
+    .expenses-list, .sidebar {
+        width: 100%; /* Both take full width */
+        padding: 0; /* Remove extra padding for smaller screens */
+    }
+    .sidebar {
+        margin-top: 20px; /* Add spacing between stacked sections */
+    }
+}
+
+@media (min-width: 769px) {
+    #menu-toggle {
+        display: none;  /* Hide the hamburger icon on large screens */
+    }
+
+    #navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        position: static;
+        background-color: transparent;
+    }
+
+    #navbar ul {
+        display: flex;
+        padding: 0;
+        margin: 0;
+    }
+
+    #navbar ul li {
+        margin-right: 20px;
+    }
+}
