@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect  # Import redirect
-from django.contrib import messages  # Import messages for success messages
-from django.db.models import Sum  # Import Sum for aggregation
-from budget.models import Expense  # Import the Expense model
+from collections import defaultdict
+from django.db.models import Sum
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from budget.models import Expense
 
 # View for the homepage
 def home(request):
@@ -42,10 +43,26 @@ def index(request):
         .annotate(total_spent=Sum('amount'))  # Sum the amounts for each category
         .order_by('category')  # Optional: Sort by category name
     )
+    
+    # Group expenses by year and month
+    grouped_expenses = defaultdict(list)
+    for expense in expenses:
+        key = (expense.date.year, expense.date.month)
+        grouped_expenses[key].append(expense)
+
+    # Sort grouped data by year and month (descending order)
+    sorted_expenses = sorted(grouped_expenses.items(), key=lambda x: x[0], reverse=True)
+
+    # Format the year and month as "Month Year"
+    formatted_expenses = []
+    for (year, month), expense_list in sorted_expenses:
+        formatted_month_year = f"{expense_list[0].date.strftime('%B')} {year}"
+        formatted_expenses.append((formatted_month_year, expense_list))
 
     return render(request, 'index.html', {
         'expenses': expenses,  # Pass the expenses to the template
-        'summary': summary  # Pass the summary data to the template
+        'summary': summary,  # Pass the summary data to the template
+        'grouped_expenses': formatted_expenses,  # Pass the formatted expenses data to the template
     })
 
 

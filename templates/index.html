@@ -1,5 +1,124 @@
 {% extends 'base.html' %}
+{% block content %}
+<h1>Expenses</h1>
+<div class="button-container">
+    <a href="{% url 'home' %}" class="button-link">Home</a>
+    <a href="{% url 'add_expense' %}" class="button-link">Add Expense</a>
+</div>
 
+<div id="main-container">
+    <!-- Category Summary Section -->
+    <div id="category-summary">
+        <h2>Category Summary</h2>
+        <ul>
+            {% for item in summary %}
+                <li>{{ item.category }}: ${{ item.total_spent|floatformat:2 }}</li>
+            {% empty %}
+                <li>No summary available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Expenses Section (Grouped by Month and Year) -->
+    <div id="expenses-list">
+        <h2>Expenses</h2>
+        {% for year_month, expenses in grouped_expenses %}
+            <h3> {{ year_month }}</h3>
+            {% if expenses %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
+                            <tr>
+                                <td>{{ expense.category }}</td>
+                                <td>${{ expense.amount|floatformat:2 }}</td>
+                                <td>{{ expense.description }}</td>
+                                <td>{{ expense.date }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No expenses for this month.</p>
+            {% endif %}
+        {% empty %}
+            <p>No grouped expenses available.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% block content %}
+<h1>Expenses</h1>
+
+<!-- Navigation buttons -->
+<div class="button-container">
+    <a href="{% url 'home' %}" class="button-link">Home</a>
+    <a href="{% url 'add_expense' %}" class="button-link">Add Expense</a>
+</div>
+
+<div id="main-container">
+    <!-- Category Summary Section (on the right) -->
+    <div id="category-summary">
+        <h2>Category Summary</h2>
+        <ul>
+            {% for item in summary %}
+                <li>{{ item.category }}: ${{ item.total_spent|floatformat:2 }}</li>
+            {% empty %}
+                <li>No summary available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Grouped Expenses Section -->
+    <div id="grouped-expenses">
+        <h2>Grouped Expenses</h2>
+        {% for (year, month), expenses in grouped_expenses %}
+            <h3>{{ month|date:"F" }} {{ year }}</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                        <tr>
+                            <td>{{ expense.category }}</td>
+                            <td>${{ expense.amount|floatformat:2 }}</td>
+                            <td>{{ expense.description }}</td>
+                            <td>{{ expense.date }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">No expenses for this month.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% empty %}
+            <p>No expenses available.</p>
+        {% endfor %}
+    </div>
+</div> 
+{% endblock %} {% endcomment %}
+
+
+{% comment %} {% extends 'base.html' %}
 {% block content %}
 <h1>Expenses</h1>
 <!-- Main container to hold both summary and expenses -->
@@ -50,4 +169,4 @@
         </table>
     </div>
 </div> 
-{% endblock %} 
+{% endblock %}  {% endcomment %}
